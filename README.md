@@ -4,7 +4,7 @@ This is a Clicker Game (taking inspiriation from Cookie Clicker) made with curse
 ## Installation
 > You will need Python for this.
 
-Download the source code, either via git, or by clicking the download button on Github.
+Download the source code, either via git, or by clicking the download button on Github. (You will need to extract the zip)
 Then either double click on the file, or run ```python3 cursed_clicker.py``` in the terminal.
 
 

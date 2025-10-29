@@ -14,9 +14,9 @@ save = {}
 def initsave():
     save["cookies"] = 0
     save["store"] = {}
-    save["store"]["clickers"] = 0
+    save["store"]["clicker"] = 0
     save["prices"] = {}
-    save["prices"]["clickers"] = 5
+    save["prices"]["clicker"] = 5
     with open("log.txt", "w") as f:
         f.write(str(type(save["store"])))
         for k,v in save["store"].items():
@@ -28,7 +28,7 @@ def store(stdscr):
         stdscr.addstr(1,0, f"Clickers add")
         stdscr.addstr(" 0.5", curses.A_BOLD)
         stdscr.addstr(" to your cps (cookies per seconds). Price is ")
-        stdscr.addstr(f"{save['prices']['clickers']}", curses.A_BOLD)
+        stdscr.addstr(f"{save['prices']['clicker']}", curses.A_BOLD)
         stdscr.addstr(2,0, "Type 0 to exit the store.")
         stdscr.addstr(3,0, f"Cookies: {save['cookies']}")
         line_at = 4
@@ -39,16 +39,16 @@ def store(stdscr):
             stdscr.addstr("(s)")
             if line_at - line_started + 1 == 1:
                 stdscr.addstr(" Currently adds ")
-                stdscr.addstr(f'{save["store"]["clickers"] * 0.5}', curses.A_BOLD)
+                stdscr.addstr(f'{save["store"]["clicker"] * 0.5}', curses.A_BOLD)
                 stdscr.addstr(" cps.")
             line_at += 1
         stdscr.refresh()
         nput = stdscr.getkey()
         if nput == str(1):
-            if save["cookies"] >= save["prices"]["clickers"]:
-                save["store"]["clickers"] += 1
-                save["prices"]["clickers"] = math.floor(save["prices"]["clickers"] * 1.15) 
-                save["cookies"] -= save["prices"]["clickers"]
+            if save["cookies"] >= save["prices"]["clicker"]:
+                save["store"]["clicker"] += 1
+                save["prices"]["clicker"] = math.floor(save["prices"]["clicker"] * 1.15) 
+                save["cookies"] -= save["prices"]["clicker"]
         if nput == str(0):
             break
 
@@ -64,7 +64,7 @@ def addcookie():
     save["cookies"] += calculate_cps()
 def calculate_cps():
     cps = 0
-    cps += save["store"]["clickers"] * 0.5
+    cps += save["store"]["clicker"] * 0.5
     cps += 1
     return cps
 

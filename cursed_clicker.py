@@ -1,4 +1,5 @@
 from curses import wrapper
+import curses
 import json
 import os
 import math
@@ -24,13 +25,22 @@ def store(stdscr):
     while True:
         stdscr.clear()
         stdscr.addstr(0,0,"Welcome to the store!")
-        stdscr.addstr(1,0, f"Clickers add 0.5 to your cps (cookies per seconds). Price is {save['prices']['clickers']}")
+        stdscr.addstr(1,0, f"Clickers add")
+        stdscr.addstr(" 0.5", curses.A_BOLD)
+        stdscr.addstr(" to your cps (cookies per seconds). Price is ")
+        stdscr.addstr(f"{save['prices']['clickers']}", curses.A_BOLD)
         stdscr.addstr(2,0, "Type 0 to exit the store.")
-        stdscr.addstr(3,0, f"Current cookies: {save['cookies']}")
+        stdscr.addstr(3,0, f"Cookies: {save['cookies']}")
         line_at = 4
         line_started = 4
         for k,v in save["store"].items():
-            stdscr.addstr(line_started, 0, f"{line_at - line_started + 1}:{k} {v}")
+            stdscr.addstr(line_started, 0, f"{line_at - line_started + 1}: You have ")
+            stdscr.addstr(f"{v} {k}", curses.A_BOLD)
+            stdscr.addstr("(s)")
+            if line_at - line_started + 1 == 1:
+                stdscr.addstr(" Currently adds ")
+                stdscr.addstr(f'{save["store"]["clickers"] * 0.5}', curses.A_BOLD)
+                stdscr.addstr(" cps.")
             line_at += 1
         stdscr.refresh()
         nput = stdscr.getkey()
@@ -63,9 +73,12 @@ def main(stdscr):
         try:
         # Print amount of cookies on top line
             stdscr.clear()
-            stdscr.addstr(0,10,f"You have {save['cookies']} cookies") 
+            stdscr.addstr(0,10,f"You have ") 
+            stdscr.addstr(f"{save['cookies']}", curses.A_BOLD)
+            stdscr.addstr(" cookies.")
             stdscr.addstr(1,10, "Type 1 for the shop")
-            stdscr.addstr(2,10, f"Your current cps is {calculate_cps()}")
+            stdscr.addstr(2,10, f"Your current cps is ")
+            stdscr.addstr(f"{calculate_cps()}", curses.A_BOLD)
             stdscr.refresh()
             nput = stdscr.getkey()
             # Check what to do

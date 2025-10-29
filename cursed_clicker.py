@@ -17,10 +17,7 @@ def initsave():
     save["store"]["clicker"] = 0
     save["prices"] = {}
     save["prices"]["clicker"] = 5
-    with open("log.txt", "w") as f:
-        f.write(str(type(save["store"])))
-        for k,v in save["store"].items():
-            f.write(f"{k},{v}\n")
+
 def store(stdscr):
     while True:
         stdscr.clear()

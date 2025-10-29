@@ -79,6 +79,7 @@ def main(stdscr):
             stdscr.addstr(1,10, "Type 1 for the shop")
             stdscr.addstr(2,10, f"Your current cps is ")
             stdscr.addstr(f"{calculate_cps()}", curses.A_BOLD)
+            stdscr.addstr(3,10,"Click Ctrl+C to save and exit")
             stdscr.refresh()
             nput = stdscr.getkey()
             # Check what to do
